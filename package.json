@@ -1,0 +1,47 @@
+{
+  "name": "@answerbook/stdlib",
+  "description": "Standardized module functions free of business logic",
+  "version": "0.0.0",
+  "main": "index.js",
+  "scripts": {
+    "tap": "tap",
+    "lint": "eslint ./",
+    "lint:fix": "npm run lint -- --fix",
+    "test": "tap",
+    "test:ci": "tools/test-ci.sh",
+    "pretest": "npm run lint",
+    "pretest:ci": "npm run lint"
+  },
+  "author": "Eric Satterwhite <eric.satterwhite@logdna.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/answerbook/stdlib-node"
+  },
+  "homepage": "https://github.com/answerbook/stdlib-node",
+  "bugs": {
+    "url": "https://github.com/answerbook/stdlib-node/issues"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "eslintConfig": {
+    "root": true,
+    "ignorePatterns": [
+      "node_modules/",
+      "coverage/"
+    ],
+    "extends": [
+      "@answerbook/eslint-config-logdna"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2019
+    },
+    "plugins": []
+  },
+  "devDependencies": {
+    "@answerbook/eslint-config-logdna": "^5.2.0",
+    "eslint": "^7.7.0",
+    "tap": "^14.10.8"
+  }
+}

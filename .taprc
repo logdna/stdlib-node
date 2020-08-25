@@ -1,0 +1,17 @@
+esm: false
+ts: false
+jsx: false
+browser: false
+check-coverage: true
+output-file: .tap
+100: true
+coverage-report:
+- text
+- text-summary
+- json
+- html
+files:
+- test/unit
+nyc-arg:
+- --exclude=test/
+- --exclude=coverage/

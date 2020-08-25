@@ -1,0 +1,99 @@
+'use strict'
+
+const {test, threw} = require('tap')
+const object = require('../../lib/object/index.js')
+
+test('object', async (t) => {
+  t.test('Exports as expected', async (t) => {
+    const entries = Object.entries(object)
+    t.equal(entries.length, 3, 'function count')
+    t.match(object, {
+      get: Function
+    , set: Function
+    , has: Function
+    }, 'function names')
+  })
+
+  t.test('object.has', async (t) => {
+    const obj = {a: 'b'}
+    t.equal(object.has(obj, 'a'), true, 'true for defined property')
+    t.equal(object.has(obj, 'hasOwnProperty'), false, 'false for propertied defined on prototype')
+  })
+
+  t.test('object.get', async (t) => {
+    const get = object.get
+    const input = {
+      l1: {
+        l1p1: 2
+      , l1p2: {
+          l3p1: 4
+        , l3p2: null
+        }
+      }
+    }
+
+    t.equal(get(input), undefined, 'default string')
+    t.equal(get(input, 'l1.l1p2.l3p1'), 4, 'default separator')
+    t.equal(get(input, 'l1-l1p2-l3p1', '-'), 4, 'custom separator')
+    t.equal(get(input, 'l1.l1p2.l3p2.l4p1'), null, 'props beyond null values')
+    t.equal(get(input, 'l1.l1p2.nope'), undefined, 'no match')
+  }).catch(threw)
+
+  t.test('object.set', async (t) => {
+    const input = {}
+
+    t.throws(() => {
+      object.set(input, null, 1)
+    }, /must be a string/ig)
+
+    {
+      const result = object.set(input, '', 1)
+      t.deepEquals(result, {}, 'empty key results in no change')
+    }
+
+    {
+      const result = object.set(input, 'x', 2)
+      t.deepEquals(result, {x: 2}, 'singular key sets immeidate value')
+    }
+
+    {
+      const result = object.set(input, 'foo.bar', 1)
+      t.deepEquals(result, {
+        x: 2
+      , foo: {
+          bar: 1
+        }
+      }, 'sets nested properties')
+    }
+
+    {
+      const result = object.set(input, 'bar|baz|nested', [1, 2], '|')
+      t.deepEquals(result, {
+        x: 2
+      , foo: {
+          bar: 1
+        }
+      , bar: {
+          baz: {
+            nested: [1, 2]
+          }
+        }
+      }, 'sets nested properties w/ custom separator')
+    }
+
+    {
+      const result = object.set(input, 'foo.bar', 100)
+      t.deepEquals(result, {
+        x: 2
+      , foo: {
+          bar: 100
+        }
+      , bar: {
+          baz: {
+            nested: [1, 2]
+          }
+        }
+      }, 'subsequent calls override previous values')
+    }
+  })
+}).catch(threw)
