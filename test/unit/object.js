@@ -17,7 +17,11 @@ test('object', async (t) => {
   t.test('object.has', async (t) => {
     const obj = {a: 'b'}
     t.equal(object.has(obj, 'a'), true, 'true for defined property')
-    t.equal(object.has(obj, 'hasOwnProperty'), false, 'false for propertied defined on prototype')
+    t.equal(
+      object.has(obj, 'hasOwnProperty')
+    , false
+    , 'false for propertied defined on prototype'
+    )
   })
 
   t.test('object.get', async (t) => {
