@@ -20,4 +20,15 @@ test('json', async (t) => {
       t.equal(result, undefined, 'invalid json returns undefined')
     }
   })
+
+  t.test('parse accepts a default return value', async (tt) => {
+    const EMPTY = {}
+    const ERRMSG = {err: 'There was a parsing error'}
+
+    const emptyObj = tryParseJSON('NOPE', EMPTY)
+    tt.deepEqual(emptyObj, EMPTY, 'Default empty object was returned')
+
+    const someErr = tryParseJSON('NAH', ERRMSG)
+    tt.deepEqual(someErr, ERRMSG, 'Default error object was returned')
+  })
 }).catch(threw)
