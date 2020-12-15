@@ -36,6 +36,8 @@ test('object', async (t) => {
       }
     }
 
+    t.equal(get(undefined, 'l1'), undefined, 'object being undefined')
+    t.equal(get(null, 'l1'), undefined, 'object being null')
     t.equal(get(input), undefined, 'default string')
     t.equal(get(input, 'l1.l1p2.l3p1'), 4, 'default separator')
     t.equal(get(input, 'l1-l1p2-l3p1', '-'), 4, 'custom separator')
