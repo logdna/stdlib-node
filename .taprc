@@ -9,6 +9,7 @@ coverage-report:
 - text
 - text-summary
 - json
+- json-summary
 - html
 files:
 - test/unit
