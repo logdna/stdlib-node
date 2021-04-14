@@ -6,9 +6,10 @@ const object = require('../../lib/object/index.js')
 test('object', async (t) => {
   t.test('Exports as expected', async (t) => {
     const entries = Object.entries(object)
-    t.equal(entries.length, 3, 'function count')
+    t.equal(entries.length, 4, 'function count')
     t.match(object, {
-      get: Function
+      filter: Function
+    , get: Function
     , set: Function
     , has: Function
     }, 'function names')
@@ -100,6 +101,35 @@ test('object', async (t) => {
           }
         }
       }, 'subsequent calls override previous values')
+    }
+  })
+
+  t.test('object.filter', async (t) => {
+    {
+      const input = 100
+      const output = object.filter(input, (key) => {
+        return !key.match(/o/ig)
+      })
+
+      t.deepEqual(output, {}, 'number returns empty object')
+    }
+
+    {
+      const input = null
+      const output = object.filter(input, (key) => {
+        return !key.match(/o/ig)
+      })
+
+      t.deepEqual(output, {}, 'null returns empty object')
+    }
+
+    {
+      const input = {one: 1, two: 2, three: 3, four: 4}
+      const output = object.filter(input, (key) => {
+        return !key.match(/o/ig)
+      })
+
+      t.deepEqual(output, {three: 3}, 'filters out non matching keys')
     }
   })
 }).catch(threw)
