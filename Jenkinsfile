@@ -1,7 +1,11 @@
 library 'magic-butler-catalogue'
 
-def PROJECT_NAME = "stdlib"
-def repo = "answerbook/${PROJECT_NAME}"
+def PROJECT_NAME = 'stdlib'
+def CURRENT_BRANCH = [env.CHANGE_BRANCH, env.BRANCH_NAME]?.find{branch -> branch != null}
+def DEFAULT_BRANCH = 'master'
+
+def DRY_RUN = CURRENT_BRANCH != DEFAULT_BRANCH
+def CHANGE_ID = env.CHANGE_ID == null ? '' : env.CHANGE_ID
 
 pipeline {
   agent none
@@ -9,6 +13,14 @@ pipeline {
   options {
     timestamps()
     ansiColor 'xterm'
+  }
+
+  environment {
+    GITHUB_TOKEN = credentials('github-api-token')
+    NPM_TOKEN = credentials('github-api-token')
+    NPM_CONFIG_CACHE = '.npm'
+    NPM_CONFIG_USERCONFIG = '.npmrc'
+    SPAWN_WRAP_SHIM_ROOT = '.npm'
   }
 
   stages {
@@ -21,25 +33,25 @@ pipeline {
           }
         }
 
+        when {
+          not {
+            changelog '\\[skip ci\\]'
+          }
+        }
+
+
         agent {
           docker {
             image "us.gcr.io/logdna-k8s/node:${NODE_VERSION}-ci"
           }
         }
 
-        environment {
-          GITHUB_PACKAGES_TOKEN = credentials('github-api-token')
-          NPM_CONFIG_CACHE = '.npm'
-          NPM_CONFIG_USERCONFIG = '.npm/rc'
-          SPAWN_WRAP_SHIM_ROOT = '.npm'
-        }
-
         stages {
           stage('Install') {
             steps {
-              sh 'mkdir -p .npm coverage'
+              sh "mkdir -p ${NPM_CONFIG_CACHE} coverage"
               script {
-                npm.auth token: "${GITHUB_PACKAGES_TOKEN}"
+                npm.auth token: "${GITHUB_TOKEN}"
               }
               sh 'npm install'
             }
@@ -47,12 +59,12 @@ pipeline {
 
           stage('Test') {
             steps {
-              sh 'npm run test:ci'
+              sh 'npm test'
             }
 
             post {
               always {
-                junit 'coverage/test.xml'
+                junit 'coverage/*.xml'
                 publishHTML target: [
                   allowMissing: false,
                   alwaysLinkToLastBuild: false,
@@ -68,66 +80,38 @@ pipeline {
       }
     }
 
-    stage('Test Release') {
+    stage ('Release') {
+      agent {
+        docker {
+          image "us.gcr.io/logdna-k8s/node:12-ci"
+          customWorkspace "${PROJECT_NAME}-${BUILD_NUMBER}"
+        }
+      }
+
       when {
-        beforeAgent true
         not {
-          branch 'master'
-        }
-      }
-
-      agent {
-        docker {
-          image "us.gcr.io/logdna-k8s/node:12-ci"
-          customWorkspace "${PROJECT_NAME}-${BUILD_NUMBER}"
+          changelog '\\[skip ci\\]'
         }
       }
 
       environment {
-        GITHUB_PACKAGES_TOKEN = credentials('github-api-token')
-        NPM_CONFIG_CACHE = '.npm'
-        NPM_CONFIG_USERCONFIG = '.npm/rc'
-        SPAWN_WRAP_SHIM_ROOT = '.npm'
+        GIT_BRANCH = "${DRY_RUN ? CURRENT_BRANCH : env.GIT_BRANCH}"
+        BRANCH_NAME = "${DRY_RUN ? CURRENT_BRANCH : env.BRANCH_NAME}"
+        CHANGE_ID = "${DRY_RUN ? '' : CHANGE_ID}"
       }
 
       steps {
-        sh 'mkdir -p .npm'
-        versioner(
-          token: "${GITHUB_PACKAGES_TOKEN}"
-        , dry: true
-        , repo: repo
-        )
-      }
-    }
-
-    stage('Release') {
-      when {
-        beforeAgent true
-        branch 'master'
-      }
-
-      agent {
-        docker {
-          image "us.gcr.io/logdna-k8s/node:12-ci"
-          customWorkspace "${PROJECT_NAME}-${BUILD_NUMBER}"
+        sh "mkdir -p ${NPM_CONFIG_CACHE}"
+        script {
+          npm.auth token: "${NPM_TOKEN}"
+          sh 'npm install'
+          if (DRY_RUN) {
+            sh "echo release dry run ${BRANCH_NAME}"
+            sh "npm run release:dry"
+          } else {
+            sh "npm run release"
+          }
         }
-      }
-
-      environment {
-        GITHUB_PACKAGES_TOKEN = credentials('github-api-token')
-        NPM_CONFIG_CACHE = '.npm'
-        NPM_CONFIG_USERCONFIG = '.npm/rc'
-        SPAWN_WRAP_SHIM_ROOT = '.npm'
-      }
-
-      steps {
-        sh 'mkdir -p .npm'
-        sh "git checkout -b ${GIT_BRANCH} origin/${GIT_BRANCH}"
-        versioner(
-          token: "${GITHUB_PACKAGES_TOKEN}"
-        , dry: false
-        , repo: repo
-        )
       }
     }
   }
