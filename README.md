@@ -170,6 +170,34 @@ const value = object.set(obj, 'four.five', 6)
 // {one: { two: three: 3 }, four: {five: 6}}
 ```
 
+#### `filter`(obj: [Object][], test: [Function][]): [Object][]
+
+Similar to array.filter, removes keys from an input object that do not pass the
+`test` function
+
+`NOTE`: This function returns a `null` object - `Object.create(null)` which does not
+inherit from Object.prototype
+
+**Arguments**
+
+* `obj` ([Object][]) - The object to introspect
+* `test` ([Function][]) - The function to be used to reject keys from the input object.
+  If this function returns a `truthy` value, the key will be included in the final output. If `falsey`
+  it will be excluded
+
+##### Example
+
+```javascript
+const {object} = require('@answerbook/stdlib')
+const obj = {one: { two: three: 3 } }
+
+object.filter({two: 2, three: 3}, (key) => {
+   return key.match(/ee$/)
+}) // {three: 3}
+```
+
+**returns** [Object][] An object containing only the keys which passed the test function.
+The return object will have a `null` prototype.
 
 ### string
 
@@ -305,5 +333,6 @@ typeOf(new Set()) // set
 [Array]: https://mdn.io/array
 [String]: https://mdn.io/string
 [Object]: https://mdn.io/object
+[Function]: https://mdn.io/function
 [Generator]: https://mdn.io/generator
 [itertools]: https://docs.python.org/3.7/library/itertools.html
