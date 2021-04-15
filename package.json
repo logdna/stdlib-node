@@ -42,6 +42,8 @@
   "devDependencies": {
     "eslint": "^7.7.0",
     "eslint-config-logdna": "^2.0.0",
+    "benchmark": "^2.1.4",
+    "microtime": "^3.0.0",
     "tap": "^14.10.8"
   }
 }
