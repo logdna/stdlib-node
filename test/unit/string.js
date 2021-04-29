@@ -158,7 +158,7 @@ test('string', async (t) => {
 
   t.test('typecast', async (t) => {
     t.type(string.typecast, 'function', 'typecast is a function')
-    t.deepEqual(string.typecast({x: 1}), {x: 1}, 'non string value')
+    t.same(string.typecast({x: 1}), {x: 1}, 'non string value')
     const cases = [{
       value: 'foo'
     , expected: 'foo'

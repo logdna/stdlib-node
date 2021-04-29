@@ -55,17 +55,17 @@ test('object', async (t) => {
 
     {
       const result = object.set(input, '', 1)
-      t.deepEquals(result, {}, 'empty key results in no change')
+      t.same(result, {}, 'empty key results in no change')
     }
 
     {
       const result = object.set(input, 'x', 2)
-      t.deepEquals(result, {x: 2}, 'singular key sets immeidate value')
+      t.same(result, {x: 2}, 'singular key sets immeidate value')
     }
 
     {
       const result = object.set(input, 'foo.bar', 1)
-      t.deepEquals(result, {
+      t.same(result, {
         x: 2
       , foo: {
           bar: 1
@@ -75,7 +75,7 @@ test('object', async (t) => {
 
     {
       const result = object.set(input, 'bar|baz|nested', [1, 2], '|')
-      t.deepEquals(result, {
+      t.same(result, {
         x: 2
       , foo: {
           bar: 1
@@ -90,7 +90,7 @@ test('object', async (t) => {
 
     {
       const result = object.set(input, 'foo.bar', 100)
-      t.deepEquals(result, {
+      t.same(result, {
         x: 2
       , foo: {
           bar: 100
@@ -111,7 +111,7 @@ test('object', async (t) => {
         return !key.match(/o/ig)
       })
 
-      t.deepEqual(output, {}, 'number returns empty object')
+      t.same(output, {}, 'number returns empty object')
     }
 
     {
@@ -120,7 +120,7 @@ test('object', async (t) => {
         return !key.match(/o/ig)
       })
 
-      t.deepEqual(output, {}, 'null returns empty object')
+      t.same(output, {}, 'null returns empty object')
     }
 
     {
@@ -129,7 +129,7 @@ test('object', async (t) => {
         return !key.match(/o/ig)
       })
 
-      t.deepEqual(output, {three: 3}, 'filters out non matching keys')
+      t.same(output, {three: 3}, 'filters out non matching keys')
     }
   })
 }).catch(threw)

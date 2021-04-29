@@ -54,11 +54,11 @@
   },
   "devDependencies": {
     "@answerbook/release-config-npm": "^1.0.15",
-    "eslint": "^7.7.0",
-    "eslint-config-logdna": "^2.0.0",
     "benchmark": "^2.1.4",
+    "eslint": "^7.7.0",
+    "eslint-config-logdna": "^5.0.0",
     "microtime": "^3.0.0",
     "semantic-release": "^17.4.2",
-    "tap": "^14.10.8"
+    "tap": "^15.0.6"
   }
 }

@@ -24,7 +24,7 @@ test('array', async (t) => {
         args.push(current.sep)
       }
 
-      t.deepEqual(
+      t.same(
         array.toArray(...args)
       , current.expected
       , current.message || `toArray(${current.value}) == ${current.expected}`
@@ -83,17 +83,17 @@ test('array', async (t) => {
     t.test('chunks empty array', async (t) => {
       const input = []
       const result = array.chunk([], 2)
-      t.deepEqual(input, [], 'empty array')
-      t.notStrictEqual(input, result, 'new array created')
+      t.same(input, [], 'empty array')
+      t.not(input, result, 'new array created')
     })
 
     t.test('chunks input array', async (t) => {
-      t.deepEqual(array.chunk([1, 2, 3], 1), [[1], [2], [3]], 'single element chunks')
-      t.deepEqual(
+      t.same(array.chunk([1, 2, 3], 1), [[1], [2], [3]], 'single element chunks')
+      t.same(
         array.chunk([1, 2, 3, 4, 5], 2)
       , [[1, 2], [3, 4], [5]]
       , 'remainder in separate chunk')
-      t.deepEqual(
+      t.same(
         array.chunk([{a: 'b'}, {c: 'd'}, {e: 'f'}], 2)
       , [[{a: 'b'}, {c: 'd'}], [{e: 'f'}]]
       , 'chunks an array of objects')
