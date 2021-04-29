@@ -13,5 +13,6 @@ coverage-report:
 files:
 - test/unit
 nyc-arg:
+- --all
 - --exclude=test/
 - --exclude=coverage/

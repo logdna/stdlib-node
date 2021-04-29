@@ -6,12 +6,13 @@ const object = require('../../lib/object/index.js')
 test('object', async (t) => {
   t.test('Exports as expected', async (t) => {
     const entries = Object.entries(object)
-    t.equal(entries.length, 4, 'function count')
+    t.equal(entries.length, 5, 'function count')
     t.match(object, {
       filter: Function
     , get: Function
     , set: Function
     , has: Function
+    , typecast: Function
     }, 'function names')
   })
 
@@ -130,6 +131,76 @@ test('object', async (t) => {
       })
 
       t.same(output, {three: 3}, 'filters out non matching keys')
+    }
+  })
+
+  test('object.typecast', async (t) => {
+    {
+      const input = {
+        foo: 'true'
+      , bar: '1'
+      , baz: {
+          bazfoo: 1
+        , bazbar: '-1'
+        , bazbaz: 'null'
+        , deep: {
+            string: 'true'
+          }
+        }
+      , qux: [1, 2, '3']
+      }
+
+      t.same(object.typecast(input), {
+        foo: true
+      , bar: 1
+      , baz: {
+          bazfoo: 1
+        , bazbar: -1
+        , bazbaz: null
+        , deep: {
+            string: true
+          }
+        }
+      , qux: [1, 2, '3']
+      }, 'typecasted object matches')
+    }
+
+    {
+      const input = {
+        one: {
+          foo: '1'
+        , two: {
+            foo: '1'
+          , three: {
+              foo: '1'
+            }
+          }
+        }
+      }
+
+      t.same(object.typecast(input, 2), {
+        one: {
+          foo: 1
+        , two: {
+            foo: 1
+          , three: {
+              foo: '1'
+            }
+          }
+        }
+      }, 'respects depth')
+
+      t.same(object.typecast(input, 1), {
+        one: {
+          foo: '1'
+        , two: {
+            foo: '1'
+          , three: {
+              foo: '1'
+            }
+          }
+        }
+      }, 'respects depth')
     }
   })
 }).catch(threw)
