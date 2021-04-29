@@ -199,6 +199,29 @@ object.filter({two: 2, three: 3}, (key) => {
 **returns** [Object][] An object containing only the keys which passed the test function.
 The return object will have a `null` prototype.
 
+#### `typecast`(obj: [Object][] [, depth: [Number][] = 1000): [Object][]
+
+Recursively typecast string values of enumerable object properties,
+using [`string.typecast()`](#typecasttext-string-object)
+
+**Arguments**
+
+* `obj` ([Object][]) - The input object
+* `key` ([Number][]) - The maximum depth to recursively typecast
+
+**returns** [Object][] A *new* object with all string properties typecast.
+
+##### Example
+
+```javascript
+const {object} = require('@answerbook/stdlib')
+const obj = {foo: '1', bar: 'null', baz: 'three', qux: {foo: '2'}}
+const casted = typecast(obj)
+// {foo: 1, bar: null, baz: 'three', qux: {foo: 2}}
+const with_depth = typecast(obj, 0)
+// {foo: 1, bar: null, baz: 'three', qux: {foo: '2'}}
+```
+
 ### string
 
 #### `camelcase`(text: [String][]): [String][]
@@ -332,6 +355,7 @@ typeOf(new Set()) // set
 [Boolean]: https://mdn.io/boolean
 [Array]: https://mdn.io/array
 [String]: https://mdn.io/string
+[Number]: https://mdn.io/number
 [Object]: https://mdn.io/object
 [Function]: https://mdn.io/function
 [Generator]: https://mdn.io/generator
