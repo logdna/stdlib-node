@@ -31,7 +31,7 @@ in a clean and consitent fashion. Nothing more, and nothing less.
   * [json](#json)
     * [`parse`(input: String): Object](#parseinput-string-object)
   * [object](#object)
-    * [`has`(obj: Object, property: String): Boolean](#hasobj-object-property-string-boolean)
+    * [`has`(obj: Object, property: String [, separator: String = '.']): Boolean](#hasobj-object-property-string--separator-string---boolean)
     * [`get`(obj: Object, property: String [, separator: String = '.']): any](#getobj-object-property-string--separator-string---any)
     * [`set`(obj: `object`, property: `string`, value: `any` [, separator: String = '.' ]): Object](#setobj-object-property-string-value-any--separator-string----object)
     * [`filter`(obj: Object, test: Function): Object](#filterobj-object-test-function-object)
@@ -127,7 +127,7 @@ json.parse('{"invalid" json') // undefined
 
 Common object manipulation and intropsection functions
 
-#### `has`(obj: [Object][], property: [String][]): [Boolean][]
+#### `has`(obj: [Object][], property: [String][] [, separator: [String][] = '.']): [Boolean][]
 
 Determines if a specified key is a direct property of an object. This function is safe
 to call on objects that do not inherit from Object.prototype, unlike attempting to call `.hasOwnProperty`
@@ -137,6 +137,8 @@ on input objects
 
 * `obj` ([Object][]) - The object to introspect
 * `key` ([String][]) - The name of the property to locate
+* (optional) `separator` ([String][]) - Delimiter character
+  * default: `'.'`
 
 **returns** [Boolean][] - True of the key is defined on the input object.
 
@@ -148,6 +150,7 @@ object.has({a: 1}, 'a') // true
 object.has({}, 'test') // false
 object.has(Object.create(null), 'test') // false
 object.has({}, 'hasOwnProperty') // false
+object.has({one: {two: {three: 3}}}, 'one-two-three', '-') // true
 ```
 
 #### `get`(obj: [Object][], property: [String][] [, separator: [String][] = '.']): any
@@ -167,7 +170,7 @@ Returns the value from an object at a specified object path.
 
 ```javascript
 const {object} = require('@logdna/stdlib')
-const obj = {one: { two: three: 3 } }
+const obj = {one: {two: {three: 3}}}
 const value = object.get(obj, 'one-two-three', '-') // 3
 ```
 #### `set`(obj: `object`, property: `string`, value: `any` [, separator: [String][] = '.' ]): [Object][]
@@ -190,7 +193,7 @@ like arrays or maps. Only POJOs
 
 ```javascript
 const {object} = require('@logdna/stdlib')
-const obj = {one: { two: three: 3 } }
+const obj = {one: {two: {three: 3}}}
 const value = object.set(obj, 'four.five', 6)
 // {one: { two: three: 3 }, four: {five: 6}}
 ```

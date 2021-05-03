@@ -17,14 +17,34 @@ test('object', async (t) => {
   })
 
   t.test('object.has', async (t) => {
-    const obj = {a: 'b'}
-    t.equal(object.has(obj, 'a'), true, 'true for defined property')
-    t.equal(
-      object.has(obj, 'hasOwnProperty')
-    , false
-    , 'false for propertied defined on prototype'
-    )
-  })
+    const has = object.has
+    const input = {
+      l1: {
+        l1p1: 2
+      , l1p2: {
+          l3p1: 4
+        , l3p2: null
+        }
+      }
+    }
+
+    t.equal(has(undefined, 'l1'), false, 'object being undefined')
+    t.equal(has(null, 'l1'), false, 'object being null')
+    t.equal(has(input), false, 'default string')
+    t.equal(has(input, 'l1p2.l3p1'), false, 'default separator')
+    t.equal(has(input, 'l1.l1p2.l3p1'), true, 'default separator')
+    t.equal(has(input, 'l1-l1p2-l3p1', '-'), true, 'custom separator')
+    t.equal(has(input, 'l1.l1p2.l3p2'), true, 'value being null')
+    t.equal(has(input, 'l1.l1p2.l3p2.l4p1'), false, 'props beyond null values')
+    t.equal(has(input, 'l1.l1p2.nope'), false, 'no match')
+    t.throws(() => {
+      object.has(input, 0)
+    }, /must be a string/ig)
+
+    t.throws(() => {
+      object.has(input, 'l1.l1p2.l3p2', 2)
+    }, /must be a string/ig)
+  }).catch(threw)
 
   t.test('object.get', async (t) => {
     const get = object.get
@@ -45,6 +65,13 @@ test('object', async (t) => {
     t.equal(get(input, 'l1-l1p2-l3p1', '-'), 4, 'custom separator')
     t.equal(get(input, 'l1.l1p2.l3p2.l4p1'), null, 'props beyond null values')
     t.equal(get(input, 'l1.l1p2.nope'), undefined, 'no match')
+    t.throws(() => {
+      object.get(input, 0)
+    }, /must be a string/ig)
+
+    t.throws(() => {
+      object.get(input, 'l1.l1p2.l3p2', 2)
+    }, /must be a string/ig)
   }).catch(threw)
 
   t.test('object.set', async (t) => {
