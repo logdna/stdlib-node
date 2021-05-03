@@ -18,8 +18,31 @@ in a clean and consitent fashion. Nothing more, and nothing less.
 ## Installation
 
 ```bash
-> npm install @answerbook/stdlib
+> npm install @logdna/stdlib
 ```
+
+* [API](#api)
+  * [array](#array)
+    * [`toArray`(item: `any`): Array](#toarrayitem-any-array)
+  * [iter](#iter)
+    * [`cycle`(items: Array): Generator](#cycleitems-array-generator)
+  * [json](#json)
+    * [`parse`(input: String): Object](#parseinput-string-object)
+  * [object](#object)
+    * [`has`(obj: Object, property: String): Boolean](#hasobj-object-property-string-boolean)
+    * [`get`(obj: Object, property: String [, separator: String = '.']): any](#getobj-object-property-string--separator-string---any)
+    * [`set`(obj: `object`, property: `string`, value: `any` [, separator: String = '.' ]): Object](#setobj-object-property-string-value-any--separator-string----object)
+    * [`filter`(obj: Object, test: Function): Object](#filterobj-object-test-function-object)
+    * [`typecast`(obj: Object [, depth: Number = 1000): Object](#typecastobj-object--depth-number--1000-object)
+  * [string](#string)
+    * [`camelcase`(text: String): String](#camelcasetext-string-string)
+    * [`lowercase`(text: String): String](#lowercasetext-string-string)
+    * [`uppercase`(text: String): String](#uppercasetext-string-string)
+    * [`slugify`(text: String [, separator: String = '-']): String](#slugifytext-string--separator-string----string)
+    * [`typecast`(text: String): Object](#typecasttext-string-object)
+  * [`typeOf`(element: `any`): String](#typeofelement-any-string)
+* [Authors](#authors)
+
 
 ## API
 
@@ -41,7 +64,7 @@ be coerced from the input value, it will be wrapped in an a single element array
 
 ##### Example
 ```javascript
-const {array} = require('@answerbook/stdlib')
+const {array} = require('@logdna/stdlib')
 array.toArray() // []
 array.toArray(null) // []
 array.toArray(1) // [1]
@@ -65,7 +88,7 @@ Iterates endlessly over a single array of items. The elements of the array can b
 ##### Example
 
 ```javascript
-const {iter} = require('@answerbook/stdlib')
+const {iter} = require('@logdna/stdlib')
 const numbers = iter.cycle([1, 2, 3])
 
 numbers.next().value // 1
@@ -93,7 +116,7 @@ Safe json parsing function that attempts to json parse a string. If it cannont, 
 ##### Example
 
 ```javascript
-const {json} = require('@answerbook/stdlib')
+const {json} = require('@logdna/stdlib')
 json.parse('{"valid": "json"}') // {valid: 'json'}
 json.parse('{"invalid" json') // undefined
 ```
@@ -118,7 +141,7 @@ on input objects
 ##### Example
 
 ```javascript
-const {object} = require('@answerbook/stdlib')
+const {object} = require('@logdna/stdlib')
 object.has({a: 1}, 'a') // true
 object.has({}, 'test') // false
 object.has(Object.create(null), 'test') // false
@@ -141,7 +164,7 @@ Returns the value from an object at a specified object path.
 ##### Example
 
 ```javascript
-const {object} = require('@answerbook/stdlib')
+const {object} = require('@logdna/stdlib')
 const obj = {one: { two: three: 3 } }
 const value = object.get(obj, 'one-two-three', '-') // 3
 ```
@@ -164,7 +187,7 @@ like arrays or maps. Only POJOs
 ##### Example
 
 ```javascript
-const {object} = require('@answerbook/stdlib')
+const {object} = require('@logdna/stdlib')
 const obj = {one: { two: three: 3 } }
 const value = object.set(obj, 'four.five', 6)
 // {one: { two: three: 3 }, four: {five: 6}}
@@ -188,7 +211,7 @@ inherit from Object.prototype
 ##### Example
 
 ```javascript
-const {object} = require('@answerbook/stdlib')
+const {object} = require('@logdna/stdlib')
 const obj = {one: { two: three: 3 } }
 
 object.filter({two: 2, three: 3}, (key) => {
@@ -214,7 +237,7 @@ using [`string.typecast()`](#typecasttext-string-object)
 ##### Example
 
 ```javascript
-const {object} = require('@answerbook/stdlib')
+const {object} = require('@logdna/stdlib')
 const obj = {foo: '1', bar: 'null', baz: 'three', qux: {foo: '2'}}
 const casted = typecast(obj)
 // {foo: 1, bar: null, baz: 'three', qux: {foo: 2}}
@@ -237,7 +260,7 @@ Casts a string value to its [camel case](https://en.wikipedia.org/wiki/Camel_cas
 ##### Example
 
 ```javascript
-const {string} = require('@answerbook/stdlib')
+const {string} = require('@logdna/stdlib')
 string.camelcase('Hello George Washington') // helloGeorgeWashington
 ```
 
@@ -255,7 +278,7 @@ will be converted to string prior to lower casing.
 ##### Example
 
 ```javascript
-const {string} = require('@answerbook/stdlib')
+const {string} = require('@logdna/stdlib')
 string.lowercase('Hello George Washington') // hello george washington
 string.lowercase({}) // [object object]
 string.lowercase(null) // ''
@@ -276,7 +299,7 @@ will be converted to string prior to upper casing.
 ##### Example
 
 ```javascript
-const {string} = require('@answerbook/stdlib')
+const {string} = require('@logdna/stdlib')
 string.uppercase('Hello George Washington') // HELLO GEORGE WASHINGTON
 string.uppercase({}) // [OBJECT OBJECT]
 string.uppercase(null) // ''
@@ -299,7 +322,7 @@ with a known value and converting to lower case
 
 ```javascript
 
-const {string} = require('@answerbook/stdlib')
+const {string} = require('@logdna/stdlib')
 string.slugify('A fake Sentence') // a-fake-sentence
 string.slugify('A fake Sentence', '::') // a::fake::sentence
 ```
@@ -319,14 +342,14 @@ it will be returned as it was passed.
 ##### Example
 
 ```javascript
-const {string} = require('@answerbook/stdlib')
+const {string} = require('@logdna/stdlib')
 string.typecast('null') // null
 string.typecast('true') // true
 string.typecast('10.01') // 10.01
 string.typecast({}) // {}
 ```
 
-### `typeOf`(element: `any`): any
+### `typeOf`(element: `any`): [String][]
 
 A more accurate version of the javascript built-in function typeof
 
@@ -339,7 +362,7 @@ A more accurate version of the javascript built-in function typeof
 ##### Example
 
 ```javascript
-const {typeOf} = require('@answerbook/stdlib')
+const {typeOf} = require('@logdna/stdlib')
 typeOf(new Date()) // 'date'
 typeOf(/\w+/) // regexp
 typeOf(() => {}) // function

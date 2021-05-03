@@ -1,5 +1,5 @@
 {
-  "name": "@answerbook/stdlib",
+  "name": "@logdna/stdlib",
   "description": "Standardized module functions free of business logic",
   "version": "0.0.0",
   "main": "index.js",
@@ -22,21 +22,21 @@
   "author": "Eric Satterwhite <eric.satterwhite@logdna.com>",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/answerbook/stdlib-node"
+    "url": "git+ssh://git@github.com/logdna/stdlib-node.git"
   },
-  "homepage": "https://github.com/answerbook/stdlib-node",
+  "homepage": "https://github.com/logdna/stdlib-node",
   "bugs": {
-    "url": "https://github.com/answerbook/stdlib-node/issues"
+    "url": "https://github.com/logdna/stdlib-node/issues"
   },
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "access": "public"
   },
   "release": {
     "branches": [
-      "master"
+      "main"
     ],
-    "extends": "@answerbook/release-config-npm"
+    "extends": "semantic-release-config-logdna"
   },
   "eslintConfig": {
     "root": true,
@@ -48,17 +48,17 @@
       "logdna"
     ],
     "parserOptions": {
-      "ecmaVersion": 2019
+      "ecmaVersion": 2020
     },
     "plugins": []
   },
   "devDependencies": {
-    "@answerbook/release-config-npm": "^1.0.15",
     "benchmark": "^2.1.4",
     "eslint": "^7.7.0",
     "eslint-config-logdna": "^5.0.0",
     "microtime": "^3.0.0",
     "semantic-release": "^17.4.2",
+    "semantic-release-config-logdna": "^1.3.0",
     "tap": "^15.0.6"
   }
 }

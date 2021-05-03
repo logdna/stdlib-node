@@ -2,8 +2,8 @@ library 'magic-butler-catalogue'
 
 def PROJECT_NAME = 'stdlib'
 def CURRENT_BRANCH = [env.CHANGE_BRANCH, env.BRANCH_NAME]?.find{branch -> branch != null}
-def DEFAULT_BRANCH = 'master'
-
+def DEFAULT_BRANCH = 'main'
+def TRIGGER_PATTERN = ".*@logdnabot.*"
 def DRY_RUN = CURRENT_BRANCH != DEFAULT_BRANCH
 def CHANGE_ID = env.CHANGE_ID == null ? '' : env.CHANGE_ID
 
@@ -15,9 +15,13 @@ pipeline {
     ansiColor 'xterm'
   }
 
+  triggers {
+    issueCommentTrigger(TRIGGER_PATTERN)
+  }
+
   environment {
     GITHUB_TOKEN = credentials('github-api-token')
-    NPM_TOKEN = credentials('github-api-token')
+    NPM_TOKEN = credentials('npm-publish-token')
     NPM_CONFIG_CACHE = '.npm'
     NPM_CONFIG_USERCONFIG = '.npmrc'
     SPAWN_WRAP_SHIM_ROOT = '.npm'
@@ -29,7 +33,7 @@ pipeline {
         axes {
           axis {
             name 'NODE_VERSION'
-            values '10', '12', '14'
+            values '12', '14', '16'
           }
         }
 
@@ -50,9 +54,6 @@ pipeline {
           stage('Install') {
             steps {
               sh "mkdir -p ${NPM_CONFIG_CACHE} coverage"
-              script {
-                npm.auth token: "${GITHUB_TOKEN}"
-              }
               sh 'npm install'
             }
           }
@@ -80,6 +81,33 @@ pipeline {
       }
     }
 
+    stage('Test Release') {
+      when {
+        beforeAgent true
+        not {
+          branch DEFAULT_BRANCH
+        }
+      }
+
+      agent {
+        docker {
+          image "us.gcr.io/logdna-k8s/node:12-ci"
+          customWorkspace "${PROJECT_NAME}-${BUILD_NUMBER}"
+        }
+      }
+
+      environment {
+        GIT_BRANCH = "${CURRENT_BRANCH}"
+        BRANCH_NAME = "${CURRENT_BRANCH}"
+        CHANGE_ID = ""
+      }
+
+      steps {
+        sh 'npm install'
+        sh 'npm run release:dry'
+      }
+    }
+
     stage ('Release') {
       agent {
         docker {
@@ -89,29 +117,17 @@ pipeline {
       }
 
       when {
+        beforeAgent true
+        branch DEFAULT_BRANCH
         not {
           changelog '\\[skip ci\\]'
         }
       }
 
-      environment {
-        GIT_BRANCH = "${DRY_RUN ? CURRENT_BRANCH : env.GIT_BRANCH}"
-        BRANCH_NAME = "${DRY_RUN ? CURRENT_BRANCH : env.BRANCH_NAME}"
-        CHANGE_ID = "${DRY_RUN ? '' : CHANGE_ID}"
-      }
-
       steps {
         sh "mkdir -p ${NPM_CONFIG_CACHE}"
-        script {
-          npm.auth token: "${NPM_TOKEN}"
-          sh 'npm install'
-          if (DRY_RUN) {
-            sh "echo release dry run ${BRANCH_NAME}"
-            sh "npm run release:dry"
-          } else {
-            sh "npm run release"
-          }
-        }
+        sh 'npm install'
+        sh 'npm run release'
       }
     }
   }
