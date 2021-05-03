@@ -2,12 +2,13 @@
   "projectName": "stdlib-node",
   "projectOwner": "logdna",
   "repoType": "github",
+  "commit": true,
+  "contributorsSortAlphabetically": true,
   "repoHost": "https://github.com",
   "files": [
     "README.md"
   ],
   "imageSize": 100,
-  "commit": true,
   "commitConvention": "angular",
   "contributors": [
     {
@@ -39,6 +40,18 @@
       "name": "Darin Spivey",
       "avatar_url": "https://avatars.githubusercontent.com/u/1874788?v=4",
       "profile": "https://github.com/darinspivey",
+      "contributions": [
+        "code",
+        "review",
+        "test",
+        "doc"
+      ]
+    },
+    {
+      "login": "weizou19",
+      "name": "Wei Zou",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56563346?v=4",
+      "profile": "https://github.com/weizou19",
       "contributions": [
         "code",
         "review",
