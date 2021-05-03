@@ -1,7 +1,7 @@
 ## stdlib
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
@@ -399,6 +399,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://codedependant.net/"><img src="https://avatars.githubusercontent.com/u/148561?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Eric Satterwhite</b></sub></a><br /><a href="https://github.com/logdna/stdlib-node/commits?author=esatterwhite" title="Code">💻</a> <a href="https://github.com/logdna/stdlib-node/pulls?q=is%3Apr+reviewed-by%3Aesatterwhite" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/logdna/stdlib-node/commits?author=esatterwhite" title="Tests">⚠️</a> <a href="https://github.com/logdna/stdlib-node/commits?author=esatterwhite" title="Documentation">📖</a></td>
+    <td align="center"><a href="https://github.com/mdeltito"><img src="https://avatars.githubusercontent.com/u/69520?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mike Del Tito</b></sub></a><br /><a href="https://github.com/logdna/stdlib-node/commits?author=mdeltito" title="Code">💻</a> <a href="https://github.com/logdna/stdlib-node/pulls?q=is%3Apr+reviewed-by%3Amdeltito" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/logdna/stdlib-node/commits?author=mdeltito" title="Tests">⚠️</a> <a href="https://github.com/logdna/stdlib-node/commits?author=mdeltito" title="Documentation">📖</a></td>
   </tr>
 </table>
 
