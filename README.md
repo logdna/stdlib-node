@@ -1,6 +1,6 @@
 ## stdlib
 
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)&nbsp;<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)<!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![Coverage Status](https://coveralls.io/repos/github/logdna/stdlib-node/badge.svg?branch=main)](https://coveralls.io/github/logdna/stdlib-node?branch=main)&nbsp;[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)&nbsp;<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Standardized modular package exposing language constructs - free of business logic.
 A departure from ldshared exposing only what you need to implement business logic
@@ -251,7 +251,7 @@ const with_depth = typecast(obj, 0)
 
 #### `camelcase`(text: [String][]): [String][]
 
-Casts a string value to its [camel case](https://en.wikipedia.org/wiki/Camel_case) variant 
+Casts a string value to its [camel case](https://en.wikipedia.org/wiki/Camel_case) variant
 
 **Arguments**
 
