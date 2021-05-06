@@ -1,5 +1,12 @@
 ## Changelog
 
+## [1.0.2](https://github.com/logdna/stdlib-node/compare/v1.0.1...v1.0.2) (2021-05-06)
+
+
+### Chores
+
+* **README**: Add badge for code coverage [55d948a](https://github.com/logdna/stdlib-node/commit/55d948a8c674a47960ab62e56b47617cbbdd10d1) - Darin Spivey
+
 ## [1.0.1](https://github.com/logdna/stdlib-node/compare/v1.0.0...v1.0.1) (2021-05-04)
 
 
