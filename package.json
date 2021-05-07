@@ -1,7 +1,7 @@
 {
   "name": "@logdna/stdlib",
   "description": "Standardized module functions free of business logic",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "scripts": {
     "tap": "tap",

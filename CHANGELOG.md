@@ -1,5 +1,12 @@
 ## Changelog
 
+## [1.0.3](https://github.com/logdna/stdlib-node/compare/v1.0.2...v1.0.3) (2021-05-07)
+
+
+### Chores
+
+* **deps**: update tap requirement from ^15.0.6 to ^15.0.9 [e39cc5b](https://github.com/logdna/stdlib-node/commit/e39cc5baaafc1f957afd5547ffc70d9cbda88d1b) - Eric Satterwhite
+
 ## [1.0.2](https://github.com/logdna/stdlib-node/compare/v1.0.1...v1.0.2) (2021-05-06)
 
 
