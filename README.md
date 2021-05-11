@@ -35,7 +35,7 @@ in a clean and consitent fashion. Nothing more, and nothing less.
     * [`get`(obj: Object, property: String [, separator: String = '.']): any](#getobj-object-property-string--separator-string---any)
     * [`set`(obj: `object`, property: `string`, value: `any` [, separator: String = '.' ]): Object](#setobj-object-property-string-value-any--separator-string----object)
     * [`filter`(obj: Object, test: Function): Object](#filterobj-object-test-function-object)
-    * [`typecast`(obj: Object [, depth: Number = 1000): Object](#typecastobj-object--depth-number--1000-object)
+    * [`typecast`(obj: Object [, depth: Number = 1000]): Object](#typecastobj-object--depth-number--1000-object)
   * [string](#string)
     * [`camelcase`(text: String): String](#camelcasetext-string-string)
     * [`lowercase`(text: String): String](#lowercasetext-string-string)
