@@ -1,5 +1,12 @@
 ## Changelog
 
+## [1.0.4](https://github.com/logdna/stdlib-node/compare/v1.0.3...v1.0.4) (2021-05-11)
+
+
+### Chores
+
+* **deps**: update eslint requirement from ^7.25.0 to ^7.26.0 [d0b06b3](https://github.com/logdna/stdlib-node/commit/d0b06b3d0c65a6c037cc4cfb91a8f4ea46f8ee1c) - Eric Satterwhite
+
 ## [1.0.3](https://github.com/logdna/stdlib-node/compare/v1.0.2...v1.0.3) (2021-05-07)
 
 
