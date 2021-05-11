@@ -33,9 +33,9 @@ in a clean and consitent fashion. Nothing more, and nothing less.
   * [object](#object)
     * [`has`(obj: Object, property: String [, separator: String = '.']): Boolean](#hasobj-object-property-string--separator-string---boolean)
     * [`get`(obj: Object, property: String [, separator: String = '.']): any](#getobj-object-property-string--separator-string---any)
-    * [`set`(obj: `object`, property: `string`, value: `any` [, separator: String = '.' ]): Object](#setobj-object-property-string-value-any--separator-string----object)
+    * [`set`(obj: Object, property: String, value: `any` [, separator: String = '.' ]): Object](#setobj-object-property-string-value-any--separator-string----object)
     * [`filter`(obj: Object, test: Function): Object](#filterobj-object-test-function-object)
-    * [`typecast`(obj: Object [, depth: Number = 1000): Object](#typecastobj-object--depth-number--1000-object)
+    * [`typecast`(obj: Object [, depth: Number = 1000]): Object](#typecastobj-object--depth-number--1000-object)
   * [string](#string)
     * [`camelcase`(text: String): String](#camelcasetext-string-string)
     * [`lowercase`(text: String): String](#lowercasetext-string-string)
@@ -44,7 +44,7 @@ in a clean and consitent fashion. Nothing more, and nothing less.
     * [`typecast`(text: String): Object](#typecasttext-string-object)
   * [`typeOf`(element: `any`): String](#typeofelement-any-string)
 * [Authors](#authors)
-
+* [Contributors ✨](#contributors-)
 
 ## API
 
@@ -173,7 +173,7 @@ const {object} = require('@logdna/stdlib')
 const obj = {one: {two: {three: 3}}}
 const value = object.get(obj, 'one-two-three', '-') // 3
 ```
-#### `set`(obj: `object`, property: `string`, value: `any` [, separator: [String][] = '.' ]): [Object][]
+#### `set`(obj: [Object][], property: [String][], value: `any` [, separator: [String][] = '.' ]): [Object][]
 
 Sets a property at the deepest level. Nested objects will be created if they do
 not exist. Returns the modified object. This will not work on complex Types
@@ -227,7 +227,7 @@ object.filter({two: 2, three: 3}, (key) => {
 **returns** [Object][] An object containing only the keys which passed the test function.
 The return object will have a `null` prototype.
 
-#### `typecast`(obj: [Object][] [, depth: [Number][] = 1000): [Object][]
+#### `typecast`(obj: [Object][] [, depth: [Number][] = 1000]): [Object][]
 
 Recursively typecast string values of enumerable object properties,
 using [`string.typecast()`](#typecasttext-string-object)
