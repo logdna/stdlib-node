@@ -1,5 +1,12 @@
 ## Changelog
 
+# [1.1.0](https://github.com/logdna/stdlib-node/compare/v1.0.4...v1.1.0) (2021-05-17)
+
+
+### Features
+
+* **object.has**: enable it on nested objects [55ee9f2](https://github.com/logdna/stdlib-node/commit/55ee9f28de8dabf61a0944cd21b6bffebc7783c9) - Samir Musali
+
 ## [1.0.4](https://github.com/logdna/stdlib-node/compare/v1.0.3...v1.0.4) (2021-05-11)
 
 
