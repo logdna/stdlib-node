@@ -55,7 +55,7 @@
   "devDependencies": {
     "benchmark": "^2.1.4",
     "eslint": "^7.26.0",
-    "eslint-config-logdna": "^5.0.0",
+    "eslint-config-logdna": "^5.1.0",
     "microtime": "^3.0.0",
     "semantic-release": "^17.4.2",
     "semantic-release-config-logdna": "^1.3.0",
