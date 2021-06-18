@@ -1,5 +1,12 @@
 ## Changelog
 
+## [1.1.1](https://github.com/logdna/stdlib-node/compare/v1.1.0...v1.1.1) (2021-06-18)
+
+
+### Documentation
+
+* make readme links consistent [efd3296](https://github.com/logdna/stdlib-node/commit/efd3296653fbf15fbfe0b6b0c1442dc034d1e6ed) - Eric Satterwhite
+
 # [1.1.0](https://github.com/logdna/stdlib-node/compare/v1.0.4...v1.1.0) (2021-05-17)
 
 
