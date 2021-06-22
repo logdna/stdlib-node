@@ -1,5 +1,12 @@
 ## Changelog
 
+## [1.1.2](https://github.com/logdna/stdlib-node/compare/v1.1.1...v1.1.2) (2021-06-22)
+
+
+### Chores
+
+* **deps**: update eslint-config-logdna requirement [7b13ef9](https://github.com/logdna/stdlib-node/commit/7b13ef9f258655dabe03d37f375fa897c92f8ea0) - Eric Satterwhite
+
 ## [1.1.1](https://github.com/logdna/stdlib-node/compare/v1.1.0...v1.1.1) (2021-06-18)
 
 
