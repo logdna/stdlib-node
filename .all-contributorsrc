@@ -58,7 +58,17 @@
         "test",
         "doc"
       ]
+    },
+    {
+      "login": "smusali",
+      "name": "Samir Musali",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34287490?v=4",
+      "profile": "http://linkedin.com/in/samirmusali",
+      "contributions": [
+        "code"
+      ]
     }
   ],
-  "contributorsPerLine": 7
+  "contributorsPerLine": 7,
+  "skipCi": true
 }
