@@ -1,5 +1,12 @@
 ## Changelog
 
+## [1.1.4](https://github.com/logdna/stdlib-node/compare/v1.1.3...v1.1.4) (2021-08-10)
+
+
+### Bug Fixes
+
+* **string**: fix typecasting of boolean values [42511bf](https://github.com/logdna/stdlib-node/commit/42511bf4c23b65f0d591a4ae6ba1eec0e8adfbb3) - Eric Satterwhite
+
 ## [1.1.3](https://github.com/logdna/stdlib-node/compare/v1.1.2...v1.1.3) (2021-07-06)
 
 
