@@ -169,6 +169,13 @@ test('string', async (t) => {
       value: 'false'
     , expected: false
     }, {
+      value: true
+    , expected: true
+    }, {
+      value: false
+    , expected: false
+    }, {
+    }, {
       value: '123'
     , expected: 123
     , message: 'integer value'
