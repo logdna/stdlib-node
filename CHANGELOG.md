@@ -1,5 +1,18 @@
 ## Changelog
 
+## [1.1.5](https://github.com/logdna/stdlib-node/compare/v1.1.4...v1.1.5) (2021-09-02)
+
+
+### Chores
+
+* **deps**: update eslint requirement from ^7.30.0 to ^7.32.0 [8a6a94c](https://github.com/logdna/stdlib-node/commit/8a6a94ce75f644a8c3af368f6685fc9c91b8c219) - Darin Spivey
+
+
+### Miscellaneous
+
+* update .all-contributorsrc [skip ci] [ed5ed63](https://github.com/logdna/stdlib-node/commit/ed5ed6347c349cf243f1d6a07444cea8953048de) - Eric Satterwhite
+* update README.md [skip ci] [a81d210](https://github.com/logdna/stdlib-node/commit/a81d2105dcf6a1910fb45eddc65516361b85acbf) - Eric Satterwhite
+
 ## [1.1.4](https://github.com/logdna/stdlib-node/compare/v1.1.3...v1.1.4) (2021-08-10)
 
 
