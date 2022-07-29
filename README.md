@@ -376,6 +376,32 @@ typeOf(() => {}) // function
 typeOf(new Set()) // set
 ```
 
+### `Callable`: [Class][]
+
+A class object whose instances are derived from [Function][] and can be called.
+When exteded, a [Symbol] function defined by `Symbol.for('call')` will be executed
+with any arguments that were passed
+
+##### Example
+
+```javascript
+const {Callable} = require('@logdna/stdlib')
+const __call__ = Symbol.for('call')
+class Hello extends Callable {
+  constructor(opts) {
+    this.yell = !!opts.yell
+  }
+  [__call__](name) {
+    const output = `Hello, name`
+    console.log(this.yell ? `${output.toUpperCase()}!` : output)
+  }
+}
+
+const screamAt = new Hello({yell: true})
+
+screamAt('bill') // HELLO, BILL!
+```
+
 ## Authors
 
 * [**Eric Satterwhite**](mailto:eric.satterwhite@logdna.com) &lt;eric.satterwhite@logdna.com&gt;
@@ -388,6 +414,7 @@ typeOf(new Set()) // set
 [Number]: https://mdn.io/number
 [Object]: https://mdn.io/object
 [Function]: https://mdn.io/function
+[Class]: https://mdn.io/class
 [Generator]: https://mdn.io/generator
 [itertools]: https://docs.python.org/3.7/library/itertools.html
 
