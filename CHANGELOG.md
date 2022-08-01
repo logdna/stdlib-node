@@ -1,5 +1,12 @@
 ## Changelog
 
+# [1.2.0](https://github.com/logdna/stdlib-node/compare/v1.1.5...v1.2.0) (2022-08-01)
+
+
+### Features
+
+* **lang**: include callable class object [b0e8d00](https://github.com/logdna/stdlib-node/commit/b0e8d006ae1fcd60e083f349bf7e83ed13eb93c5) - Eric Satterwhite
+
 ## [1.1.5](https://github.com/logdna/stdlib-node/compare/v1.1.4...v1.1.5) (2021-09-02)
 
 
