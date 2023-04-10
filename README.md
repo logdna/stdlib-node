@@ -5,8 +5,6 @@
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 Standardized modular package exposing language constructs - free of business logic.
-A departure from ldshared exposing only what you need to implement business logic
-in a clean and consitent fashion. Nothing more, and nothing less.
 
 ## Main Goals
 
