@@ -1,5 +1,17 @@
 ## Changelog
 
+## [1.2.1](https://github.com/logdna/stdlib-node/compare/v1.2.0...v1.2.1) (2023-04-10)
+
+
+### Chores
+
+* Update jenkins agent specification [18b582a](https://github.com/logdna/stdlib-node/commit/18b582a379f72c3bdeae1eaa185f56ac9cb0a137) - Jon Moses
+
+
+### Documentation
+
+* Remove internal tooling reference from readme [21da877](https://github.com/logdna/stdlib-node/commit/21da877735cebee45a02f08de20a7db721e85de9) - Jon Moses
+
 # [1.2.0](https://github.com/logdna/stdlib-node/compare/v1.1.5...v1.2.0) (2022-08-01)
 
 
