@@ -1,5 +1,18 @@
 ## Changelog
 
+## [1.2.2](https://github.com/logdna/stdlib-node/compare/v1.2.1...v1.2.2) (2023-04-11)
+
+
+### Chores
+
+* **deps**: update microtime requirement from ^3.0.0 to ^3.1.1 [e5c5beb](https://github.com/logdna/stdlib-node/commit/e5c5beb816eed1ba2156b553a2e1a2fe82a3e5a7) - Eric Satterwhite
+
+
+### Miscellaneous
+
+* update .all-contributorsrc [skip ci] [ae4e58f](https://github.com/logdna/stdlib-node/commit/ae4e58f13fdae16fdedd1ac8b24e31750e5bf01d) - Eric Satterwhite
+* update README.md [skip ci] [f9f03cf](https://github.com/logdna/stdlib-node/commit/f9f03cf176232101e7b294e057fbff378d4f36f3) - Eric Satterwhite
+
 ## [1.2.1](https://github.com/logdna/stdlib-node/compare/v1.2.0...v1.2.1) (2023-04-10)
 
 
