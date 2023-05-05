@@ -1,5 +1,12 @@
 ## Changelog
 
+## [1.2.3](https://github.com/logdna/stdlib-node/compare/v1.2.2...v1.2.3) (2023-05-05)
+
+
+### Bug Fixes
+
+* **ci**: gate prs from non maintainers [249c079](https://github.com/logdna/stdlib-node/commit/249c079b7c0365f2956ca27e4b55566b99069588) - Eric Satterwhite
+
 ## [1.2.2](https://github.com/logdna/stdlib-node/compare/v1.2.1...v1.2.2) (2023-04-11)
 
 
