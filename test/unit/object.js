@@ -44,6 +44,8 @@ test('object', async (t) => {
     t.throws(() => {
       object.has(input, 'l1.l1p2.l3p2', 2)
     }, /must be a string/ig)
+
+    t.equal(has({one: 1}, 'one'), true, 'returns early if there is no delimiter to split')
   }).catch(threw)
 
   t.test('object.get', async (t) => {
