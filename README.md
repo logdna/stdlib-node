@@ -23,29 +23,47 @@ Standardized modular package exposing language constructs - free of business log
 > npm install @logdna/stdlib
 ```
 
-* [API](#api)
-  * [array](#array)
-    * [`toArray`(item: `any`): Array](#toarrayitem-any-array)
-  * [iter](#iter)
-    * [`cycle`(items: Array): Generator](#cycleitems-array-generator)
-  * [json](#json)
-    * [`parse`(input: String): Object](#parseinput-string-object)
-  * [object](#object)
-    * [`has`(obj: Object, property: String [, separator: String = '.']): Boolean](#hasobj-object-property-string--separator-string---boolean)
-    * [`get`(obj: Object, property: String [, separator: String = '.']): any](#getobj-object-property-string--separator-string---any)
-    * [`set`(obj: Object, property: String, value: `any` [, separator: String = '.' ]): Object](#setobj-object-property-string-value-any--separator-string----object)
-    * [`filter`(obj: Object, test: Function): Object](#filterobj-object-test-function-object)
-    * [`typecast`(obj: Object [, depth: Number = 1000]): Object](#typecastobj-object--depth-number--1000-object)
-  * [string](#string)
-    * [`camelcase`(text: String): String](#camelcasetext-string-string)
-    * [`lowercase`(text: String): String](#lowercasetext-string-string)
-    * [`uppercase`(text: String): String](#uppercasetext-string-string)
-    * [`slugify`(text: String [, separator: String = '-']): String](#slugifytext-string--separator-string----string)
-    * [`typecast`(text: String): Object](#typecasttext-string-object)
-  * [`typeOf`(element: `any`): String](#typeofelement-any-string)
-  * [`Callable`: Class](#callable-class)
-* [Authors](#authors)
-* [Contributors ✨](#contributors-)
+- [stdlib](#stdlib)
+- [Main Goals](#main-goals)
+- [Installation](#installation)
+- [API](#api)
+  - [array](#array)
+    - [`toArray`(item: `any`): Array](#toarrayitem-any-array)
+      - [Example](#example)
+  - [iter](#iter)
+    - [`cycle`(items: Array): Generator](#cycleitems-array-generator)
+      - [Example](#example-1)
+  - [json](#json)
+    - [`parse`(input: String): Object](#parseinput-string-object)
+      - [Example](#example-2)
+  - [object](#object)
+    - [`has`(obj: Object, property: String \[, separator: String = '.'\]): Boolean](#hasobj-object-property-string--separator-string---boolean)
+      - [Example](#example-3)
+    - [`get`(obj: Object, property: String \[, separator: String = '.'\]): any](#getobj-object-property-string--separator-string---any)
+      - [Example](#example-4)
+    - [`set`(obj: Object, property: String, value: `any` \[, separator: String = '.' \]): Object](#setobj-object-property-string-value-any--separator-string----object)
+      - [Example](#example-5)
+    - [`filter`(obj: Object, test: Function): Object](#filterobj-object-test-function-object)
+      - [Example](#example-6)
+    - [`typecast`(obj: Object \[, depth: Number = 1000\]): Object](#typecastobj-object--depth-number--1000-object)
+      - [Example](#example-7)
+  - [string](#string)
+    - [`camelcase`(text: String): String](#camelcasetext-string-string)
+      - [Example](#example-8)
+    - [`lowercase`(text: String): String](#lowercasetext-string-string)
+      - [Example](#example-9)
+    - [`uppercase`(text: String): String](#uppercasetext-string-string)
+      - [Example](#example-10)
+    - [`slugify`(text: String \[, separator: String = '-'\]): String](#slugifytext-string--separator-string----string)
+      - [Example](#example-11)
+    - [`typecast`(text: String): Object](#typecasttext-string-object)
+      - [Example](#example-12)
+  - [`typeOf`(element: `any`): String](#typeofelement-any-string)
+      - [Example](#example-13)
+  - [`Callable`: Class](#callable-class)
+      - [Example](#example-14)
+- [Authors](#authors)
+- [Contributors ✨](#contributors-)
 
 ## API
 
@@ -178,7 +196,7 @@ const value = object.get(obj, 'one-two-three', '-') // 3
 
 Sets a property at the deepest level. Nested objects will be created if they do
 not exist. Returns the modified object. This will not work on complex Types
-like arrays or maps. Only POJOs
+like arrays or maps; Only POJOs.
 
 `NOTE`: if you find your self wanting to set the value at a specific index of an array - you probably want an object.
 
@@ -204,9 +222,6 @@ const value = object.set(obj, 'four.five', 6)
 Similar to array.filter, removes keys from an input object that do not pass the
 `test` function
 
-`NOTE`: This function returns a `null` object - `Object.create(null)` which does not
-inherit from Object.prototype
-
 **Arguments**
 
 * `obj` ([Object][]) - The object to introspect
@@ -226,7 +241,6 @@ object.filter({two: 2, three: 3}, (key) => {
 ```
 
 **returns** [Object][] An object containing only the keys which passed the test function.
-The return object will have a `null` prototype.
 
 #### `typecast`(obj: [Object][] [, depth: [Number][] = 1000]): [Object][]
 
@@ -336,7 +350,7 @@ string.slugify('A fake Sentence', '::') // a::fake::sentence
 #### `typecast`(text: [String][]): [Object][]
 
 Best effort to cast a string to its native couter part where possible.
-Supported casts are booleans, numbers, null and undefined
+Supported casts are booleans, numbers, null and undefined.
 
 **Arguments**
 
