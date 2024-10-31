@@ -38,13 +38,13 @@ pipeline {
       steps {
         error("A maintainer needs to approve this PR for CI by commenting")
       }
-    }    
+    }
     stage('Test Suite') {
       matrix {
         axes {
           axis {
             name 'NODE_VERSION'
-            values '12', '14', '16'
+            values '12', '14', '16', '18', '20'
           }
         }
 

@@ -130,6 +130,34 @@ test('object', async (t) => {
         }
       }, 'subsequent calls override previous values')
     }
+
+    {
+      const result = object.set(input, 'foo.fizz.fab', {hello: 'there'}, null, false)
+      t.same(result, {
+        x: 2
+      , foo: {
+          bar: 100
+        , fizz: {
+            fab: {hello: 'there'}
+          }
+        }
+      , bar: {
+          baz: {
+            nested: [1, 2]
+          }
+        }
+      }, 'set successful')
+      t.equal(
+        result.foo.fizz.constructor.name
+      , 'Object'
+      , 'parent prototype is correct'
+      )
+      t.equal(
+        result.foo.fizz.fab.constructor.name
+      , 'Object'
+      , 'child prototype is correct'
+      )
+    }
   })
 
   t.test('object.filter', async (t) => {
@@ -158,6 +186,16 @@ test('object', async (t) => {
       })
 
       t.same(output, {three: 3}, 'filters out non matching keys')
+    }
+
+    {
+      const input = {one: 1, two: 2, three: 3, four: 4}
+      const output = object.filter(input, (key) => {
+        return !key.match(/o/ig)
+      }, false)
+
+      t.same(output, {three: 3}, 'filter worked')
+      t.equal(output.constructor.name, 'Object', 'prototype is correct')
     }
   })
 
@@ -228,6 +266,17 @@ test('object', async (t) => {
           }
         }
       }, 'respects depth')
+    }
+
+    {
+      const input = {
+        foo: 'true'
+      }
+      const result = object.typecast(input, null, false)
+      t.same(result, {
+        foo: true
+      }, 'typecast was successful')
+      t.same(result.constructor.name, 'Object', 'typecasted object has prototype')
     }
   })
 }).catch(threw)

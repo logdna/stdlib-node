@@ -23,29 +23,47 @@ Standardized modular package exposing language constructs - free of business log
 > npm install @logdna/stdlib
 ```
 
-* [API](#api)
-  * [array](#array)
-    * [`toArray`(item: `any`): Array](#toarrayitem-any-array)
-  * [iter](#iter)
-    * [`cycle`(items: Array): Generator](#cycleitems-array-generator)
-  * [json](#json)
-    * [`parse`(input: String): Object](#parseinput-string-object)
-  * [object](#object)
-    * [`has`(obj: Object, property: String [, separator: String = '.']): Boolean](#hasobj-object-property-string--separator-string---boolean)
-    * [`get`(obj: Object, property: String [, separator: String = '.']): any](#getobj-object-property-string--separator-string---any)
-    * [`set`(obj: Object, property: String, value: `any` [, separator: String = '.' ]): Object](#setobj-object-property-string-value-any--separator-string----object)
-    * [`filter`(obj: Object, test: Function): Object](#filterobj-object-test-function-object)
-    * [`typecast`(obj: Object [, depth: Number = 1000]): Object](#typecastobj-object--depth-number--1000-object)
-  * [string](#string)
-    * [`camelcase`(text: String): String](#camelcasetext-string-string)
-    * [`lowercase`(text: String): String](#lowercasetext-string-string)
-    * [`uppercase`(text: String): String](#uppercasetext-string-string)
-    * [`slugify`(text: String [, separator: String = '-']): String](#slugifytext-string--separator-string----string)
-    * [`typecast`(text: String): Object](#typecasttext-string-object)
-  * [`typeOf`(element: `any`): String](#typeofelement-any-string)
-  * [`Callable`: Class](#callable-class)
-* [Authors](#authors)
-* [Contributors ✨](#contributors-)
+- [stdlib](#stdlib)
+- [Main Goals](#main-goals)
+- [Installation](#installation)
+- [API](#api)
+  - [array](#array)
+    - [`toArray`(item: `any`): Array](#toarrayitem-any-array)
+      - [Example](#example)
+  - [iter](#iter)
+    - [`cycle`(items: Array): Generator](#cycleitems-array-generator)
+      - [Example](#example-1)
+  - [json](#json)
+    - [`parse`(input: String): Object](#parseinput-string-object)
+      - [Example](#example-2)
+  - [object](#object)
+    - [`has`(obj: Object, property: String \[, separator: String = '.'\]): Boolean](#hasobj-object-property-string--separator-string---boolean)
+      - [Example](#example-3)
+    - [`get`(obj: Object, property: String \[, separator: String = '.'\]): any](#getobj-object-property-string--separator-string---any)
+      - [Example](#example-4)
+    - [`set`(obj: Object, property: String, value: `any` \[, separator: String = '.' \], \[use\_null\_prototype: Boolean\] = `true`): Object](#setobj-object-property-string-value-any--separator-string----use_null_prototype-boolean--true-object)
+      - [Example](#example-5)
+    - [`filter`(obj: Object, test: Function, \[use\_null\_prototype: Boolean = `true`\]): Object](#filterobj-object-test-function-use_null_prototype-boolean--true-object)
+      - [Example](#example-6)
+    - [`typecast`(obj: Object \[, depth: Number = 1000\], \[use\_null\_prototype: Boolean = `true`\]): Object](#typecastobj-object--depth-number--1000-use_null_prototype-boolean--true-object)
+      - [Example](#example-7)
+  - [string](#string)
+    - [`camelcase`(text: String): String](#camelcasetext-string-string)
+      - [Example](#example-8)
+    - [`lowercase`(text: String): String](#lowercasetext-string-string)
+      - [Example](#example-9)
+    - [`uppercase`(text: String): String](#uppercasetext-string-string)
+      - [Example](#example-10)
+    - [`slugify`(text: String \[, separator: String = '-'\]): String](#slugifytext-string--separator-string----string)
+      - [Example](#example-11)
+    - [`typecast`(text: String): Object](#typecasttext-string-object)
+      - [Example](#example-12)
+  - [`typeOf`(element: `any`): String](#typeofelement-any-string)
+      - [Example](#example-13)
+  - [`Callable`: Class](#callable-class)
+      - [Example](#example-14)
+- [Authors](#authors)
+- [Contributors ✨](#contributors-)
 
 ## API
 
@@ -174,11 +192,11 @@ const {object} = require('@logdna/stdlib')
 const obj = {one: {two: {three: 3}}}
 const value = object.get(obj, 'one-two-three', '-') // 3
 ```
-#### `set`(obj: [Object][], property: [String][], value: `any` [, separator: [String][] = '.' ]): [Object][]
+#### `set`(obj: [Object][], property: [String][], value: `any` [, separator: [String][] = '.' ], \[use_null_prototype: [Boolean][]\] = `true`): [Object][]
 
 Sets a property at the deepest level. Nested objects will be created if they do
 not exist. Returns the modified object. This will not work on complex Types
-like arrays or maps. Only POJOs
+like arrays or maps; Only POJOs.
 
 `NOTE`: if you find your self wanting to set the value at a specific index of an array - you probably want an object.
 
@@ -189,6 +207,8 @@ like arrays or maps. Only POJOs
 * `value` (`any`) - The value to set at the specified path
 * (*optional*) `separator` ([String][]) - Delimiter character
   * default: `'.'`
+* (*optional*) `use_null_prototype` ([Boolean][])- If `true` uses a `null` prototype for any objects that are created.
+  * defaut: `true`
 
 ##### Example
 
@@ -199,13 +219,12 @@ const value = object.set(obj, 'four.five', 6)
 // {one: { two: three: 3 }, four: {five: 6}}
 ```
 
-#### `filter`(obj: [Object][], test: [Function][]): [Object][]
+#### `filter`(obj: [Object][], test: [Function][], \[use_null_prototype: [Boolean][] = `true`\]): [Object][]
 
 Similar to array.filter, removes keys from an input object that do not pass the
 `test` function
 
-`NOTE`: This function returns a `null` object - `Object.create(null)` which does not
-inherit from Object.prototype
+`NOTE`: By default, his function returns a `null` object - `Object.create(null)` which does not inherit from Object.prototype.  This may be turned off by setting `use_null_prototype: false`
 
 **Arguments**
 
@@ -213,6 +232,8 @@ inherit from Object.prototype
 * `test` ([Function][]) - The function to be used to reject keys from the input object.
   If this function returns a `truthy` value, the key will be included in the final output. If `falsey`
   it will be excluded
+* (*optional*) `use_null_prototype` ([Boolean][])- If `true` uses a `null` prototype for any objects that are created.
+  * defaut: `true`
 
 ##### Example
 
@@ -228,7 +249,7 @@ object.filter({two: 2, three: 3}, (key) => {
 **returns** [Object][] An object containing only the keys which passed the test function.
 The return object will have a `null` prototype.
 
-#### `typecast`(obj: [Object][] [, depth: [Number][] = 1000]): [Object][]
+#### `typecast`(obj: [Object][] [, depth: [Number][] = 1000], \[use_null_prototype: [Boolean][] = `true`\]): [Object][]
 
 Recursively typecast string values of enumerable object properties,
 using [`string.typecast()`](#typecasttext-string-object)
@@ -237,6 +258,8 @@ using [`string.typecast()`](#typecasttext-string-object)
 
 * `obj` ([Object][]) - The input object
 * `key` ([Number][]) - The maximum depth to recursively typecast
+* (*optional*) `use_null_prototype` ([Boolean][])- If `true` uses a `null` prototype for any objects that are created.
+  * defaut: `true`
 
 **returns** [Object][] A *new* object with all string properties typecast.
 
