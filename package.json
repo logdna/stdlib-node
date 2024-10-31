@@ -29,6 +29,10 @@
     "url": "https://github.com/logdna/stdlib-node/issues"
   },
   "license": "MIT",
+  "engineStrict": true,
+  "engines": {
+    "node": ">=16"
+  },
   "publishConfig": {
     "access": "public"
   },
