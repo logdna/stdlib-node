@@ -1,5 +1,29 @@
 ## Changelog
 
+# [2.0.0](https://github.com/logdna/stdlib-node/compare/v1.2.3...v2.0.0) (2024-11-01)
+
+
+### Bug Fixes
+
+* **object**: `has` should return early if nothing to split [8b815a0](https://github.com/logdna/stdlib-node/commit/8b815a056d49259c57e48a03370aa33704db066c) - Darin Spivey
+
+
+### Chores
+
+* **pkg**: Require node >= 16 [6ba1ed6](https://github.com/logdna/stdlib-node/commit/6ba1ed69e9f526a66d9480088e314b43422ff42e) - Darin Spivey
+
+
+### Code Refactoring
+
+* **object**: Remove `null` prototyped objects [5c5dbaf](https://github.com/logdna/stdlib-node/commit/5c5dbaf97383c9933e2908ee47d986ca73d0cd33) - Darin Spivey
+
+
+### **BREAKING CHANGES**
+
+* **object:** The response objects in certain functions will have the
+`Object` prototype instead of a `null` one.
+* **pkg:** This commit turns on `strictEngines`
+
 ## [1.2.3](https://github.com/logdna/stdlib-node/compare/v1.2.2...v1.2.3) (2023-05-05)
 
 
