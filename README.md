@@ -62,6 +62,9 @@ Standardized modular package exposing language constructs - free of business log
       - [Example](#example-13)
   - [`Callable`: Class](#callable-class)
       - [Example](#example-14)
+  - [path](#path)
+    - [`moduleId`(location: String \[, root: String = process.cwd(), sep: String = ':'\]): String](#moduleidlocation-string--root-string--processcwd-sep-string---string)
+      - [Example](#example-15)
 - [Authors](#authors)
 - [Contributors ✨](#contributors-)
 
@@ -413,6 +416,32 @@ class Hello extends Callable {
 const screamAt = new Hello({yell: true})
 
 screamAt('bill') // HELLO, BILL!
+```
+
+### `path`
+
+#### `moduleId`(location: [String][] [, root: [String][] = `process.cwd()`, sep: [String][] = `':'`]): [String][]
+
+Returns the path from `root` to the module at `location`, separated by `sep`.
+
+**Arguments**
+
+* `location` ([String][]) - The module's location, typically `__filename`
+* (optional) `root` ([String][]) - The root directory to find the relative path to `location` from
+  * default: `process.cwd()`
+* (optional) `separator` ([String][]) - Delimiter character
+  * default: `':'`
+
+##### Example
+
+```javascript
+const {path} = require(@logdna/stdlib)
+
+const my_module = path.moduleId(__filename)
+// e.g. lib:my-module
+
+const pipe_delimited_module = path.moduleId(__filename, __dirname, '|')
+// e.g. lib|my-module
 ```
 
 ## Authors
