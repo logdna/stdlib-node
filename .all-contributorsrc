@@ -77,8 +77,18 @@
         "doc",
         "bug"
       ]
+    },
+    {
+      "login": "matt-march",
+      "name": "Matt March",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60368220?v=4",
+      "profile": "https://github.com/matt-march",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs"
 }
