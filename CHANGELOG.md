@@ -1,5 +1,12 @@
 ## Changelog
 
+# [2.1.0](https://github.com/logdna/stdlib-node/compare/v2.0.0...v2.1.0) (2025-07-11)
+
+
+### Features
+
+* **moduleId**: add module id function [4a20cad](https://github.com/logdna/stdlib-node/commit/4a20cad276e003442dc03173008c27e419e02ace) - Matt March
+
 # [2.0.0](https://github.com/logdna/stdlib-node/compare/v1.2.3...v2.0.0) (2024-11-01)
 
 
